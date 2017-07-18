@@ -1,0 +1,1 @@
+<code>runPullRequestAnalysis(pathToSonarRoot)</code> Creates a new <i>Sonar Pull Request Analysis</i> stage and runs a Pull request sonar analysis on <code>pathToSonarRoot</code> (defaults to current path)

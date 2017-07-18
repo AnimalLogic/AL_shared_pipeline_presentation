@@ -1,0 +1,7 @@
+<li><code>build(options='')</code> High level fucntion that creates a new <i>building</i> stage and run <code>rez build</code> in the current working directory with the <code>options</code> passed. <code>Options</code> can be any set of options you can pass to <code>rez build</code> in the command line. ie <code>--build-target RelWithDebInfo --install -- -- -j 16</code></li>
+<li><code>test(target='', options='')</code> High level fucntion that creates a new <i>testing</i> stage and run <code>rez build</code> in the current working directory passing the given <code>target</code> (usually set to <code>test</code>) into the <code>--cba</code> argument. Other <code>options</code> can be passed including more <code>--cba</code> options.</li>
+<p></p>
+<li><code>runAllTests(directory, options='', installPath='', targetName='all_tests')</code>Runs <code>rez-build -c -- -- $targetName</code> on the given <code>directory</code> (relative to <i>WORKSPACE</i>).It does <b>not</b> create a stage.</li> 
+<li><code>runRezTarget(directory, target='', options='', installPath='')</code>. Low level function to call <code>rez build</code> on a given <code>directory</code> with a given <code>target</code> and <code>options</code>. If <code>-i</code> is among the <code>options</code> it will install the package at <code>installPath</code>. If <code>installPath</code> is not given, it defaults to <code>/tmp/env.BUILD_TAG/packages</code>. It does <b>not</b> create a stage.
+</li>
+ 

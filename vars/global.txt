@@ -1,0 +1,5 @@
+<li> <code>shellCommandOutput(command, verbose=false)</code> Gets the output of a shell command. Setting <code>verbose</code> to true prints the command being executed in the log. </li> 
+<li> <code>removeDir()</code> Removes a Directory if that exists. </li> 
+<li> <code> getValueWithDefault(param, defaultValue) <code> Returns the value of a given build parameter or a <code>defaultValue</code> if it is not set. </li>
+
+ 

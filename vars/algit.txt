@@ -1,0 +1,14 @@
+<li><code>checkout(gitRepoURL, gitBranch='', private=false)</code> Checks out a git repository on the given branch. If <code>gitBranch</code> is not passed it defaults to <code>env.GIT_BRANCH</code>. If <code>private</code> is true it would use buildboy2 credentials (note that this will only work on secure nodes).</li>
+<li><code>getSha()</code> - Returns the commit id of current commit.</li> 
+<li><code>getRepoURL()</code> - Returns the full url of the current checked out repo</li> 
+<p></p>
+<li><code>reportCurrentStatusToGitHub()</code> Reports the current status to GitHub based on the current value of <code>currentBuild.result</code>.</li>
+<li><code>reportStatusToGitHub(resultState, resultMessage, context)</code> Reports the give status to github git the given message. Default context is the name of the job. </li>
+<li><code>setBuildStatusAndReportToGitHub(status, context)</code>Sets the currentBuild status based on the shell status given and reports it to github. Default context is the name of the job. </li>
+<li><code>reportCurrentStatusToGitHub()</code> Reports the current status to github based on the value of currentBuild.result.</li> 
+<p></p>
+The <code>report___ToGithub()</code> functions Relies on: 
+<ul>
+  <li><b>GITHUB_REPO</b> or defaults to the repo checked out in the current workspace.</li>
+  <li><b>GIT_STATUS_SHA</b> or defaults to the current sha checked out in the current  workspace.</li>
+</ul>
