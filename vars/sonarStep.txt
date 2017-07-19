@@ -1,0 +1,1 @@
+<code>sonarStep(pathToSonarRoot)</code> Step to create a new <i>Sonar Pull Request Analysis</i> on <code>pathToSonarRoot</code> (defaults to current path)
