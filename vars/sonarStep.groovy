@@ -8,6 +8,9 @@ def call(String pathToSonarRoot='.'){
         def prID  = ''
 
         dir(pathToSonarRoot){
+
+            println 'Sonar executing at: ' + pathToSonarRoot
+
             if (params.GITHUB_ORGANIZATION && params.GITHUB_REPO && params.GITHUB_PULL_REQUEST_NUMBER )
             {
                 owner = params.GITHUB_ORGANIZATION
@@ -29,6 +32,7 @@ def call(String pathToSonarRoot='.'){
                     return
                 }
             }
+            
 
             sonarCommand = "sonar -Dsonar.analysis.mode=preview -Dsonar.projectVersion=0.0.0 -Dsonar.github.oauth=3e29f3262facf6ce61b2b2dfb3ea6dc75efd3d16 -Dsonar.github.repository=" + owner  + "/" + repo + " -Dsonar.github.pullRequest=" + prID
 
