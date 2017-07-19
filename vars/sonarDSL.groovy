@@ -5,7 +5,7 @@ def call(body) {
     body.delegate = config
     body()
 
-    node('CentOS'){
+    node('master'){
         stage ('Sonar Pull Request Analysis')
         {
             withEnv(["SONAR_USER_HOME=/var/tmp/.sonar"])
