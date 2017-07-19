@@ -1,0 +1,1 @@
+<code>sonarDSL</code>full pipeline running the on a CentOS node checking out the code and running a  <i>Sonar Pull Request Analysis</i> on <code>pathToSonarRoot</code> (defaults to current path)

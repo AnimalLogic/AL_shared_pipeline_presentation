@@ -33,7 +33,7 @@ def call(String pathToSonarRoot='.'){
 
                 sonarCommand = "sonar -Dsonar.analysis.mode=preview -Dsonar.projectVersion=0.0.0 -Dsonar.github.oauth=3e29f3262facf6ce61b2b2dfb3ea6dc75efd3d16 -Dsonar.github.repository=" + owner  + "/" + repo + " -Dsonar.github.pullRequest=" + prID
 
-                sh ('rez-env sonar pylint -c \"' + sonarCommand + "\"")
+                sh ('echo rez-env sonar pylint -c \"' + sonarCommand + "\"")
             }
         }
     }
