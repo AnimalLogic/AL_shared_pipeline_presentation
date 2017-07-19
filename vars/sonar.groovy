@@ -2,42 +2,45 @@
 
 def runPullRequestAnalysis(pathToSonarRoot='.')
 {
-    withEnv(["SONAR_USER_HOME=/var/tmp/.sonar"])
+    stage ('Sonar Pull Request Analysis')
     {
-        def owner = ''
-        def repo  = ''
-        def prID  = ''
+        withEnv(["SONAR_USER_HOME=/var/tmp/.sonar"])
+        {
+            def owner = ''
+            def repo  = ''
+            def prID  = ''
 
-        dir(pathToSonarRoot){
+            dir(pathToSonarRoot){
 
-            println 'Sonar executing at: ' + pathToSonarRoot
+                println 'Sonar executing at: ' + pathToSonarRoot
 
-            if (params.GITHUB_ORGANIZATION && params.GITHUB_REPO && params.GITHUB_PULL_REQUEST_NUMBER )
-            {
-                owner = params.GITHUB_ORGANIZATION
-                repo = params.GITHUB_REPO
-                prID = params.GITHUB_PULL_REQUEST_NUMBER
-                
-            }
-            else{
-                if (env.CHANGE_URL)
+                if (params.GITHUB_ORGANIZATION && params.GITHUB_REPO && params.GITHUB_PULL_REQUEST_NUMBER )
                 {
-                    def prInfo = parseChangeURL(env.CHANGE_URL) 
-                    owner = prInfo[0]
-                    repo = prInfo[1]
-                    prID = prInfo[2]
+                    owner = params.GITHUB_ORGANIZATION
+                    repo = params.GITHUB_REPO
+                    prID = params.GITHUB_PULL_REQUEST_NUMBER
+                    
                 }
-                else
-                {
-                    println "There is not enough information to run a sonar Pull request analysis"
-                    return
+                else{
+                    if (env.CHANGE_URL)
+                    {
+                        def prInfo = parseChangeURL(env.CHANGE_URL) 
+                        owner = prInfo[0]
+                        repo = prInfo[1]
+                        prID = prInfo[2]
+                    }
+                    else
+                    {
+                        println "There is not enough information to run a sonar Pull request analysis"
+                        return
+                    }
                 }
-            }
-            sonarCommand = "sonar -Dsonar.analysis.mode=preview -Dsonar.projectVersion=0.0.0 -Dsonar.github.oauth=3e29f3262facf6ce61b2b2dfb3ea6dc75efd3d16 -Dsonar.github.repository=" + owner  + "/" + repo + " -Dsonar.github.pullRequest=" + prID
+                    sonarCommand = "sonar -Dsonar.analysis.mode=preview -Dsonar.projectVersion=0.0.0 -Dsonar.github.oauth=3e29f3262facf6ce61b2b2dfb3ea6dc75efd3d16 -Dsonar.github.repository=" + owner  + "/" + repo + " -Dsonar.github.pullRequest=" + prID
 
-            sh ('echo rez-env sonar pylint -c \"' + sonarCommand + "\"")
+                    sh ('rez-env sonar pylint -c \"' + sonarCommand + "\"")
+            }
         }
-    }
+    }    
 }
 
 def parseChangeURL(URL){
